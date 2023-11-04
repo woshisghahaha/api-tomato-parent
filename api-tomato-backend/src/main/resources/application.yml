@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: api-tomato-backend
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: xxxxxxxxxx
+    username: xxxxxxx
+    password: xxxxxxxxxx
+    # 文件上传
+    servlet:
+      multipart:
+        # 大小限制
+        max-file-size: 10MB
+  devtools:
+    restart:
+      enabled: true
+# 支持 swagger3
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  # session 失效时间（分钟）
+  session:
+    timeout: 86400
+    store-type: redis
+  # redis 配置
+  redis:
+    host: xxxxxxxxx
+    port: xxxx
+    database: xxxxx
+    timeout: 1800000
+    jedis:
+      pool:
+        max-active: 20 #最大连接数
+        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
+        max-idle: 5    #最大空闲
+        min-idle: 0     #最小空闲
+server:
+  port: 7529
+  servlet:
+    context-path: /api
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+aliyun:
+  oss:
+    endpoint: xxxxxxxxxxxxxxxx
+    accessKeyId: xxxxxxxxxxxxxxxxxxxxx
+    accessKeySecret: xxxxxxxxxxxxxxxxxxxx
+    bucketName: xxxxxxxxxxxxxxxxxx
+#这段配置仅供测试 实际应该根据登录用户获取对应的ak sk
+#apitomato:
+#  client:
+#    access-key:
+#    secret-key:
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: xxxxxxxxxxxxxxx
+#设置网关地址
+tomato:
+  gateway:
+    host: xxxxxxxxxxxxxxxx
+
