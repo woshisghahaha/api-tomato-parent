@@ -1,0 +1,56 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: api-tomato-gateway #解决 nacos serviceName is illegal错误
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=source, tomato
+      routes:
+        - id: api_route
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/**
+  # Redis 配置
+  redis:
+    host: xxxxxxxxxxxxxx
+    port: xxxxxxxxxxxx
+    database: xxxx
+    timeout: 1800000
+    jedis:
+      pool:
+        max-active: 20 #最大连接数
+        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
+        max-idle: 5    #最大空闲
+        min-idle: 0     #最小空闲
+#        - id: add_request_header_route
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=tomato, swag
+#            - AddRequestParameter=name, dog
+#            - name: CircuitBreaker
+#              args:
+#                name: myCircuitBreaker
+#                fallbackUri: forward:/fallback
+#        - id: tomato-fallback
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/fallback
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://xxxxxxxxxxxx

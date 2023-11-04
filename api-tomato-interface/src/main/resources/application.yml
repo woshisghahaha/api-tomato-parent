@@ -1,0 +1,19 @@
+server:
+  port: 8123
+spring:
+  application:
+    name: api-tomato-interface
+  # DataSource Config
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://43.136.91.18:3306/api_tomato?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: root
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    username: xxxxxxxxxxxxxxxxxxx
+    password: xxxxxxxxxxxxxxxxxx
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
